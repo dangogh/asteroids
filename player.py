@@ -28,13 +28,21 @@ class Player(CircleShape):
 
         if keys[pygame.K_a]:
             self.rotate(-dt)
-        if keys[pygame.K_d]:
+        elif keys[pygame.K_d]:
             self.rotate(dt)
-        if keys[pygame.K_SPACE]:
+        elif keys[pygame.K_SPACE]:
             self.shoot()
+        elif keys[pygame.K_w]:
+            self.move(dt)
+        elif keys[pygame.K_s]:
+            self.move(-dt)
 
         self.timer -= dt
     
+    def move(self, dt):
+        v = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += v * PLAYER_SPEED * dt
+
     def shoot(self):
         if self.timer > 0:
             return
